@@ -42,39 +42,35 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     if (validateInput(pilot.value) === "Empty" || validateInput(copilot.value) === "Empty" || validateInput(fuelLevel.value) === "Empty" || validateInput(cargoLevel.value) === "Empty") {
         alert("All fields required");
-    };
-
-    if (validateInput(pilot.value) === "Is a Number" || validateInput(copilot.value) === "Is a Number") {
+    } else if (validateInput(pilot.value) === "Is a Number" || validateInput(copilot.value) === "Is a Number") {
         alert("Input CANNOT be a number")
-    };
-
-    if (validateInput(fuelLevel.value) === "Not a Number" || validateInput(cargoLevel.value) === "Not a Number") {
+    } else if (validateInput(fuelLevel.value) === "Not a Number" || validateInput(cargoLevel.value) === "Not a Number") {
         alert("Input MUST be a number")
-    };
+    } else {
 
+        if (Number(fuelLevel.value) < 10000) {
+            list.style.visibility = "visible"
+            fuelStatus.innerHTML = "Not enough fuel for journey"
+            lauchStatus.innerHTML = "Shuttle not ready for launch"
+            lauchStatus.style.color = "red"
+        };
 
-    if (Number(fuelLevel.value) < 10000) {
-        list.style.visibility = "visible"
-        fuelStatus.innerHTML = "Not enough fuel for journey"
-        lauchStatus.innerHTML = "Shuttle not ready for launch"
-        lauchStatus.style.color = "red"
-    };
+        if (Number(cargoLevel.value) > 10000) {
+            list.style.visibility = "visible"
+            cargoStatus.innerHTML = "Too much mass for shuttle takeoff"
+            launchStatus.innerHTML = "Shuttle not ready for launch"
+            lauchStatus.style.color = "red"
+        };
 
-    if (Number(cargoLevel.value) > 10000) {
-        list.style.visibility = "visible"
-        cargoStatus.innerHTML = "Too much mass for shuttle takeoff"
-        launchStatus.innerHTML = "Shuttle not ready for launch"
-        lauchStatus.style.color = "red"
-    };
+        if (Number(fuelLevel.value > 10000 && cargoLevel.value < 10000)) {
+            launchStatus.innerHTML = "Shuttle is ready for launch"
+            lauchStatus.style.color = "green"
+        };
 
-    if (Number(fuelLevel.value > 10000 && cargoLevel.value < 10000)) {
-        launchStatus.innerHTML = "Shuttle is ready for launch"
-        lauchStatus.style.color = "green"
-    };
+        pilotStatus.innerHTML = `Pilot ${pilot.value} Ready`
 
-    pilotStatus.innerHTML = `Pilot ${pilot.value} Ready`
-
-    copilotStatus.innerHTML = `Co-Pilot ${copilot.value} Ready`
+        copilotStatus.innerHTML = `Co-Pilot ${copilot.value} Ready`
+    }
 
 };
 
@@ -92,8 +88,7 @@ async function myFetch() {
 
 
 function pickPlanet(planets) {
-    let planets = 0;
-    return planets = Math.round(Math.random() * JSON.length)
+    return planets[Math.round(Math.random() * planets.length)]
 };
 
 module.exports.addDestinationInfo = addDestinationInfo;

@@ -4,12 +4,13 @@ const { formSubmission, myFetch, addDestinationInfo, pickPlanet } = require("./s
 window.addEventListener("load", function () {
     //when this form submit is clicked ->>event
     //create listerner function for formSubmit
-    let testForm = document.getElementById("testForm");
+    console.log("Hello")
+    let form = document.querySelector("form")
     let lauchStatus = document.getElementById("launchStatus");
     let fuelLevel = document.getElementById("fuelLevel");
     let cargoLevel = document.getElementById("cargoMass");
 
-    testForm.addEventListener("submit", function (event) {
+    form.addEventListener("submit", function (event) {
         let list = document.getElementById("faultyItems");
         let fuelLevel = document.getElementById("fuelLevel");
         let cargoLevel = document.getElementById("cargoMass");
@@ -29,8 +30,8 @@ window.addEventListener("load", function () {
     }).then(function () {
         console.log(listedPlanets);
         // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
-        pickPlanet(Math.round(Math.random() * listedPlanets.length));
-        addDestinationInfo(pickPlanet());
+        let selectedPlanet = pickPlanet(listedPlanets);
+        addDestinationInfo(document, selectedPlanet.name, selectedPlanet.diameter, selectedPlanet.star, selectedPlanet.distance, selectedPlanet.moons, selectedPlanet.image);
     })
 
 
