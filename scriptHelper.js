@@ -29,6 +29,7 @@ function validateInput(testInput) {
     };
 };
 
+
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let pilotStatus = document.getElementById("pilotStatus");
     let copilotStatus = document.getElementById("copilotStatus");
@@ -53,24 +54,25 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
             fuelStatus.innerHTML = "Not enough fuel for journey"
             lauchStatus.innerHTML = "Shuttle not ready for launch"
             lauchStatus.style.color = "red"
-        };
+        }
 
         if (Number(cargoLevel.value) > 10000) {
             list.style.visibility = "visible"
             cargoStatus.innerHTML = "Too much mass for shuttle takeoff"
             launchStatus.innerHTML = "Shuttle not ready for launch"
             lauchStatus.style.color = "red"
-        };
+        }
 
         if (Number(fuelLevel.value > 10000 && cargoLevel.value < 10000)) {
             launchStatus.innerHTML = "Shuttle is ready for launch"
             lauchStatus.style.color = "green"
-        };
+        }
 
         pilotStatus.innerHTML = `Pilot ${pilot.value} Ready`
 
         copilotStatus.innerHTML = `Co-Pilot ${copilot.value} Ready`
-    }
+
+    };
 
 };
 
@@ -90,6 +92,7 @@ async function myFetch() {
 function pickPlanet(planets) {
     return planets[Math.round(Math.random() * planets.length)]
 };
+
 
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
