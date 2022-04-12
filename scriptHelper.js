@@ -16,7 +16,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                  <img src="${json.image}">`
 };
 
-
+//validate there the correct data type entered
 function validateInput(testInput) {
     if (testInput === "") {
         return ("Empty");
